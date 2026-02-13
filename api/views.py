@@ -1,5 +1,6 @@
-
+from django.http.multipartparser import MultiPartParser
 from rest_framework import mixins,generics
+from rest_framework.parsers import FormParser
 from rest_framework.response import Response
 
 from .serializer import *
@@ -15,7 +16,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 class ReportListView(generics.GenericAPIView,
                      mixins.ListModelMixin,
                      mixins.CreateModelMixin,):
-
+    parser_classes = [MultiPartParser, FormParser]
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
